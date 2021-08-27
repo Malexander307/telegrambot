@@ -8,48 +8,46 @@ use Illuminate\Support\Facades\Http;
 class WebHookController extends Controller
 {
     public function index(Request $request){
-        $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
-        $request = $request->toArray();
-        $chatId = (int)trim($request["message"]["chat"]["id"]);
-        $name = $request["message"]["from"]["first_name"];
-        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" .$name);
-        $chatId = (int)preg_replace('/\^ /', "", $chatId);
-        $text = "Hello ".$name;
-        $keyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => 'Add', 'callback_data' => 'add_mem'],
-                    ['text' => 'Watch', 'callback_data' => 'watch_mems']
-                ],
-            ]
-        ];
-        $encodedKeyboard = json_encode($keyboard);
-        $parameters =
-            array(
-                'chat_id' => $chatId,
-                'text' => $text,
-                'reply_markup' => $encodedKeyboard
-            );
-//        try {
-//            if ($request["callback_query"]['data'] == 'add_mem') {
-//                Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
-//            } else {
-//                $this->send('sendMessage', $parameters);
-//            }
-//        }catch (\Exception $exception) {
-//             Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" .$exception);
-//        }
-        switch ($request["message"]) {
-            case 'f':
-                $this->send('sendMessage', $parameters);
-                break;
+        try {
+            $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
+            $request = $request->toArray();
+            $chatId = (int)trim($request["message"]["chat"]["id"]);
+            $name = $request["message"]["from"]["first_name"];
+            Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
+            $chatId = (int)preg_replace('/\^ /', "", $chatId);
+            $text = "Hello " . $name;
+            $keyboard = [
+                'inline_keyboard' => [
+                    [
+                        ['text' => 'Add', 'callback_data' => 'add_mem'],
+                        ['text' => 'Watch', 'callback_data' => 'watch_mems']
+                    ],
+                ]
+            ];
+            $encodedKeyboard = json_encode($keyboard);
+            $parameters =
+                array(
+                    'chat_id' => $chatId,
+                    'text' => $text,
+                    'reply_markup' => $encodedKeyboard
+                );
+
+            switch ($request["message"]) {
+                case 'f':
+                    $this->send('sendMessage', $parameters);
+                    break;
+            }
+            if (isset($request["callback_query"])) {
+                switch ($request["callback_query"]['data']) {
+                    case 'add_mem':
+                        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
+                        break;
+                }
+            }
+//            $this->send('sendMessage', $parameters);
+        }catch (\Exception $exception){
+            Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $exception);
         }
-        switch ($request["callback_query"]['data']) {
-            case 'add_mem':
-                Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
-                break;
-        }
-        $this->send('sendMessage', $parameters);
 //        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
 
