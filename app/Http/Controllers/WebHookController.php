@@ -32,7 +32,7 @@ class WebHookController extends Controller
                     'reply_markup' => $encodedKeyboard
                 );
 
-            switch ($request["message"]) {
+            switch ($request["message"]["text"]) {
                 case 'f':
                     $this->send('sendMessage', $parameters);
                     break;
