@@ -29,12 +29,16 @@ class WebHookController extends Controller
                 'text' => $text,
                 'reply_markup' => $encodedKeyboard
             );
-        if ($request["callback_query"]['data'] == 'add_mem'){
-             Http::post($path."/sendmessage?chat_id=".$chatId."&text="."test");
-        }else {
-            $this->send('sendMessage', $parameters);
+        try {
+            if ($request["callback_query"]['data'] == 'add_mem') {
+                Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
+            } else {
+                $this->send('sendMessage', $parameters);
+            }
+        }catch (\Exception $exception) {
+             Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" .$exception);
         }
-
+        $this->send('sendMessage', $parameters);
 //        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
 
