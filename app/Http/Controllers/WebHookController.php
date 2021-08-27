@@ -14,12 +14,10 @@ class WebHookController extends Controller
         $name = $request["message"]["from"]["first_name"];
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello ".$name;
-
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => 'Add', 'callback_data' => 'Add_mem'],
-                    ['text' => 'Watch', 'callback_data' => 'Watch_mems']
+                    ['text' => 'forward me to groups', 'callback_data' => 'someString']
                 ]
             ]
         ];
@@ -30,13 +28,10 @@ class WebHookController extends Controller
                 'text' => $text,
                 'reply_markup' => $encodedKeyboard
             );
-        if ($request["callback_query"]["data"] == "Add_mem"){
-            Http::post($path."/sendmessage?chat_id=".$chatId."&text=".$text);
-        }else {
-            $this->send('sendMessage', $parameters);
-        }
 
-        Http::post($path."/sendmessage?chat_id=".$chatId."&text=".$text);
+        $this->send('sendMessage', $parameters);
+
+//        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
 
     private function send($method, $data)
