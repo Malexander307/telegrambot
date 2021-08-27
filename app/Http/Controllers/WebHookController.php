@@ -17,7 +17,9 @@ class WebHookController extends Controller
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => 'forward me to groups', 'callback_data' => 'someString'],
+                    ['text' => 'forward me to groups', 'callback_data' => 'someString']
+                ],
+                [
                     ['text' => 'forward me to groups', 'callback_data' => 'someString']
                 ]
             ]
