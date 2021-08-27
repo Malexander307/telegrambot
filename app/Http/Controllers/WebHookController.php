@@ -15,14 +15,40 @@ class WebHookController extends Controller
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello ".$name;
         $keyboard = [
-    'inline_keyboard' => [
-        [
-            ['text' => 'forward me to groups', 'callback_data' => 'someString']
-        ]
-    ]
-];
-$encodedKeyboard = json_encode($keyboard);
+            'inline_keyboard' => [
+                [
+                    ['text' => 'forward me to groups', 'callback_data' => 'someString']
+                ]
+            ]
+        ];
+        $encodedKeyboard = json_encode($keyboard);
+        $parameters =
+            array(
+                'chat_id' => $chatId,
+                'text' => $text,
+                'reply_markup' => $encodedKeyboard
+            );
 
-        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
+        $this->send('sendMessage', $parameters);
+
+//        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
+    }
+
+    private function send($method, $data)
+    {
+        $url = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10" . "/" . $method;
+
+        if (!$curld = curl_init()) {
+            exit;
+        }
+        curl_setopt($curld, CURLOPT_POST, true);
+        curl_setopt($curld, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curld, CURLOPT_URL, $url);
+        curl_setopt($curld, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($curld);
+        curl_close($curld);
+        return $output;
     }
 }
+
+
