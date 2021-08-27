@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('test', [WebHookController::class, 'index']);
+Route::any('test', [WebHookController::class, 'index']);
