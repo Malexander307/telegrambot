@@ -11,9 +11,8 @@ class WebHookController extends Controller
     public function index(Request $request){
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $request = $request->toArray();
-        $update = json_decode(file_get_contents("php://input"), TRUE);
 
-        $chatId = $update["message"]["chat"]["id"];
+        $chatId = $request["message"]["chat"]["id"];
         file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in");
 //        Http::post($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ");
     }
