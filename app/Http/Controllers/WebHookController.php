@@ -14,7 +14,15 @@ class WebHookController extends Controller
         $name = $request["message"]["from"]["first_name"];
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello ".$name;
-        $text = "keyboardButton#a2fa4880 text:string = KeyboardButton;";
-        Http::post($path."/sendmessage?chat_id=".$chatId."&text=".$text);
+        $keyboard = [
+    'inline_keyboard' => [
+        [
+            ['text' => 'forward me to groups', 'callback_data' => 'someString']
+        ]
+    ]
+];
+$encodedKeyboard = json_encode($keyboard);
+
+        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
 }
