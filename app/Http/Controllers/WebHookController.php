@@ -12,6 +12,7 @@ class WebHookController extends Controller
         $request = $request->toArray();
         $chatId = (int)trim($request["message"]["chat"]["id"]);
         $name = $request["message"]["from"]["first_name"];
+        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" .$name);
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello ".$name;
         $keyboard = [
