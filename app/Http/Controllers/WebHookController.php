@@ -31,10 +31,11 @@ class WebHookController extends Controller
             );
         if ($request["callback_query"]['data'] == 'add_mem'){
              Http::post($path."/sendmessage?chat_id=".$chatId."&text="."test");
+        }else {
+            $this->send('sendMessage', $parameters);
         }
-        $this->send('sendMessage', $parameters);
 
-        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
+//        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
 
     private function send($method, $data)
