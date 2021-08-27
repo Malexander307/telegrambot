@@ -30,13 +30,10 @@ class WebHookController extends Controller
                 'reply_markup' => $encodedKeyboard
             );
         if ($request["callback_query"]["data"] == "Add_mem"){
-            $parameters =
-            array(
-                'chat_id' => $chatId,
-                'text' => $text.", all is good"
-            );
+            Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
+        }else {
+            $this->send('sendMessage', $parameters);
         }
-        $this->send('sendMessage', $parameters);
 
 //        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
     }
