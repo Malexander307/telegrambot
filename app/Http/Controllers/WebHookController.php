@@ -13,9 +13,8 @@ class WebHookController extends Controller
 //        dd($request);
         $request = $request->toArray();
         $chatId = (int)trim($request["message"]["chat"]["id"]);
-        $chatId = preg_replace('/\^ /', "", $chatId);
-        dd("test");
-        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in");
-//        Http::post($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ");
+        $chatId = (int)preg_replace('/\^ /', "", $chatId);
+//        file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in");
+        Http::post($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ");
     }
 }
