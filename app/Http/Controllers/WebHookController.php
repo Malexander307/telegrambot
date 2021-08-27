@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\Http;
 class WebHookController extends Controller
 {
     public function index(Request $request){
-        $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $request = $request->toArray();
         $chatId = (int)trim($request["message"]["chat"]["id"]);
         $name = $request["message"]["from"]["first_name"];
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello ".$name;
+
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => 'forward me to groups', 'callback_data' => 'someString']
+                    ['text' => 'Add', 'callback_data' => 'Add_mem'],
+                    ['text' => 'Watch', 'callback_data' => 'Watch_mems']
                 ]
             ]
         ];
@@ -28,7 +29,13 @@ class WebHookController extends Controller
                 'text' => $text,
                 'reply_markup' => $encodedKeyboard
             );
-
+        if ($request["callback_query"]["data"] == "Add_mem"){
+            $parameters =
+            array(
+                'chat_id' => $chatId,
+                'text' => $text.", all is good"
+            );
+        }
         $this->send('sendMessage', $parameters);
 
 //        Http::post($path."/sendmessage?chat_id=".$chatId."&reply_markup=".$encodedKeyboard);
