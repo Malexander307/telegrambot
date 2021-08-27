@@ -10,6 +10,7 @@ class WebHookController extends Controller
 {
     public function index(Request $request){
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
+        $chatId = $request->message->chat->id;
         Http::get($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ");
     }
 }
