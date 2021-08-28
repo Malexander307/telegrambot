@@ -14,30 +14,23 @@ class WebHookController extends Controller
         if (!isset($request["callback_query"])) {
             $chatId = (int)trim($request["message"]["chat"]["id"]);
             $name = $request["message"]["from"]["first_name"];
-        }
-        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
-        $chatId = (int)preg_replace('/\^ /', "", $chatId);
-        $text = "Hello " . $name;
-        $keyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => 'test', 'callback_data' => 'test'],
-                    ['text' => 'Watch', 'callback_data' => 'watch_mems']
-                ],
-            ]
-        ];
-        $encodedKeyboard = json_encode($keyboard);
-        $parameters =
-            array(
-                'chat_id' => $chatId,
-                'text' => $text,
-                'reply_markup' => $encodedKeyboard
-            );
-
-        switch ($request["message"]["text"]) {
-            case 'f':
-                $this->send('sendMessage', $parameters);
-                break;
+            Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
+            $text = "Hello " . $name;
+            $keyboard = [
+                'inline_keyboard' => [
+                    [
+                        ['text' => 'test', 'callback_data' => 'test'],
+                        ['text' => 'Watch', 'callback_data' => 'watch_mems']
+                    ],
+                ]
+            ];
+            $encodedKeyboard = json_encode($keyboard);
+            $parameters =
+                array(
+                    'chat_id' => $chatId,
+                    'text' => $text,
+                    'reply_markup' => $encodedKeyboard
+                );
         }
         if (isset($request["callback_query"])) {
             switch ($request["callback_query"]['data']) {
@@ -47,6 +40,13 @@ class WebHookController extends Controller
                     break;
             }
         }
+
+        switch ($request["message"]["text"]) {
+            case 'f':
+                $this->send('sendMessage', $parameters);
+                break;
+        }
+
 
     }
 
