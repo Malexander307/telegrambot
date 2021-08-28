@@ -40,6 +40,7 @@ class WebHookController extends Controller
             if (isset($request["callback_query"])) {
                 switch ($request["callback_query"]['data']) {
                     case 'add_mem':
+                        $chat_id = $result['callback_query']['from']['id'];
                         Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
                         break;
                 }
