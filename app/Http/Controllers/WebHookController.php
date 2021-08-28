@@ -31,23 +31,20 @@ class WebHookController extends Controller
                     'text' => $text,
                     'reply_markup' => $encodedKeyboard
                 );
+            switch ($request["message"]["text"]) {
+                case 'f':
+                    $this->send('sendMessage', $parameters);
+                    break;
+            }
         }
         if (isset($request["callback_query"])) {
             switch ($request["callback_query"]['data']) {
                 case 'test':
-                    $chat_id = $request['callback_query']['from']['id'];
+                    $chatId = $request['callback_query']['from']['id'];
                     Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . "test");
                     break;
             }
         }
-
-        switch ($request["message"]["text"]) {
-            case 'f':
-                $this->send('sendMessage', $parameters);
-                break;
-        }
-
-
     }
 
     private function send($method, $data)
