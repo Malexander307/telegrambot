@@ -19,7 +19,7 @@ class WebHookController extends Controller
             $keyboard = [
                 'inline_keyboard' => [
                     [
-                        ['text' => 'Add', 'url' => 'https://www.google.com/'],
+                        ['text' => 'Add', 'callback_data' => 'add_mem'],
                         ['text' => 'Watch', 'callback_data' => 'watch_mems']
                     ],
                 ]
