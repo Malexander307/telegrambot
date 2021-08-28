@@ -9,11 +9,12 @@ class WebHookController extends Controller
 {
     public function index(Request $request)
     {
-
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $request = $request->toArray();
-        $chatId = (int)trim($request["message"]["chat"]["id"]);
-        $name = $request["message"]["from"]["first_name"];
+        if (!isset($request["callback_query"])) {
+            $chatId = (int)trim($request["message"]["chat"]["id"]);
+            $name = $request["message"]["from"]["first_name"];
+        }
         Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
         $chatId = (int)preg_replace('/\^ /', "", $chatId);
         $text = "Hello " . $name;
