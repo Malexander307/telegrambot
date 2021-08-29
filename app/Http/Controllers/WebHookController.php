@@ -11,9 +11,7 @@ class WebHookController extends Controller
     {
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $request = $request->toArray();
-        $this->send('sendPhoto', PhotoController::sendPhoto($request));
-        return;
-        if (isset($request["photo"])){
+        if (isset($request["message"]["photo"])){
             $this->send('sendPhoto', PhotoController::sendPhoto($request));
             return;
         }
