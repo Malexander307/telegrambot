@@ -14,7 +14,7 @@ class WebHookController extends Controller
         if (!isset($request["callback_query"])) {
             $chatId = (int)trim($request["message"]["chat"]["id"]);
             $name = $request["message"]["from"]["first_name"];
-            http_response_code(200);
+//            http_response_code(200);
             Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
             $text = "Hello " . $name;
             $keyboard = [
