@@ -17,6 +17,7 @@ class WebHookController extends Controller
             header("HTTP/1.1 200 OK");
             http_response_code(200);
             Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
+            return;
             $text = "Hello " . $name;
             $keyboard = [
                 'inline_keyboard' => [
