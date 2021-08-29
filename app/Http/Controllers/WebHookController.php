@@ -13,6 +13,7 @@ class WebHookController extends Controller
         $request = $request->toArray();
         if (isset($request["photo"])){
             $this->send('sendPhoto', PhotoController::sendPhoto($request));
+            return;
         }
         if (!isset($request["callback_query"])) {
             $chatId = (int)trim($request["message"]["chat"]["id"]);
