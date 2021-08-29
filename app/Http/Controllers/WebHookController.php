@@ -11,6 +11,9 @@ class WebHookController extends Controller
     {
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $request = $request->toArray();
+        if (isset($request["photo"])){
+            $this->send('sendPhoto', PhotoController::sendPhoto($request));
+        }
         if (!isset($request["callback_query"])) {
             $chatId = (int)trim($request["message"]["chat"]["id"]);
             $name = $request["message"]["from"]["first_name"];
