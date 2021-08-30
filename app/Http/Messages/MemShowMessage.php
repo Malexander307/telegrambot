@@ -17,6 +17,7 @@ class MemShowMessage
         $data = array(
             'chat_id' => (int)trim($chat_id),
             'photo' => $mem->image_id
+        );
         Messenger::send('sendPhoto', $data);
         Messenger::send('answerCallbackQuery',array(
             'callback_query_id' => $query_id
