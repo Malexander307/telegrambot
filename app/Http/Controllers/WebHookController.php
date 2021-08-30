@@ -27,7 +27,7 @@ class WebHookController extends Controller
                     MemShowMessage::showMem(MemsRepository::getMems(), $request['callback_query']['from']['id'], $request['callback_query']['id']);
                     break;
                 case 'like':
-
+                    MemService::addLike($request['callback_query']["photo"][0]["file_id"]);
                     break;
             }
         }

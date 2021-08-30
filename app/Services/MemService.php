@@ -18,6 +18,5 @@ class MemService
         $mem = Mems::where('image_id', $photo_id);
         $mem->count_likes = $mem->count_likes + 1;
         $mem->save();
-
     }
 }
