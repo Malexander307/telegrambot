@@ -16,7 +16,7 @@ class MemShowMessage
         $encodedKeyboard = json_encode($keyboard);
         $data = array(
             'chat_id' => (int)trim($chat_id),
-            'photo' => $mem->photo_id,
+            'photo' => $mem->image_id,
             'reply_markup' => $encodedKeyboard
         );
         Messenger::send('sendPhoto', $data);
