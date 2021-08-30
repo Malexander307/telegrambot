@@ -16,7 +16,7 @@ class WebHookController extends Controller
     {
         $request = $request->toArray();
         if (isset($request["message"]["photo"])){
-            MemService::addMem($request["message"]["photo"][0]["file_id"], $request["message"]["from"]["id"]);
+            MemService::addMem($request["message"]["photo"][0]["file_unique_id"], $request["message"]["from"]["id"]);
         }
         if (isset($request["callback_query"])) {
             switch ($request["callback_query"]["data"]) {
