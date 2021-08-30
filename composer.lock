@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "077ade88701e074e7ffa2d01e7e45a3c",
+    "content-hash": "26d02536581eb659efb207ba1fcf069b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -833,6 +833,36 @@
                 "url"
             ],
             "time": "2021-06-30T20:03:07+00:00"
+        },
+        {
+            "name": "image4io/image4iophp-sdk",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Image4IO/image4iophpSDK.git",
+                "reference": "ebe18c5866955a1b45fd49f292e6d784bdf05423"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Image4IO/image4iophpSDK/zipball/ebe18c5866955a1b45fd49f292e6d784bdf05423",
+                "reference": "ebe18c5866955a1b45fd49f292e6d784bdf05423",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Image4IO\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP SDK for image4.io",
+            "time": "2020-11-29T09:35:21+00:00"
         },
         {
             "name": "laravel/framework",
