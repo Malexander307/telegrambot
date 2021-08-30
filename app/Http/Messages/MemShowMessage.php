@@ -8,8 +8,8 @@ class MemShowMessage
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => 'test', 'callback_data' => 'test'],
-                    ['text' => 'Watch', 'callback_data' => 'watch_mems']
+                    ['text' => 'Like', 'callback_data' => 'like'],
+                    ['text' => 'Continue to watch', 'callback_data' => 'watch_mems']
                 ],
             ]
         ];
