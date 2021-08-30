@@ -15,7 +15,7 @@ class CreateMemsTable extends Migration
     {
         Schema::create('mems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('image_id');
+            $table->string('image_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('count_likes');
             $table->timestamps();

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Messages\AddMessage;
+use App\Http\Messages\MemShowMessage;
 use App\Http\Messages\StartMessage;
+use App\Repositories\MemsRepository;
 use App\Services\MemService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -23,6 +25,9 @@ class WebHookController extends Controller
             switch ($request["callback_query"]["data"]) {
                 case 'add_mem':
                     AddMessage::addMemsMessage($request);
+                    break;
+                case 'watch_mems':
+                    MemShowMessage::showMem(MemsRepository::getMems(), $request["message"]["from"]["id"]);
                     break;
             }
         }
