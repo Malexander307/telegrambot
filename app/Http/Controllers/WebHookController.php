@@ -27,7 +27,7 @@ class WebHookController extends Controller
                     AddMessage::addMemsMessage($request);
                     break;
                 case 'watch_mems':
-                    Http::post($path . "/sendmessage?chat_id=" . $request['callback_query']['from']['id'] . "&text=" . $request['callback_query']['from']['id']);
+//                    Http::post($path . "/sendmessage?chat_id=" . $request['callback_query']['from']['id'] . "&text=" . $request['callback_query']['from']['id']);
                     MemShowMessage::showMem(MemsRepository::getMems(), $request['callback_query']['from']['id'], $request['callback_query']['id']);
                     break;
             }
