@@ -11,6 +11,8 @@ class AddMessage
                     'text' => $text
                 );
         Messenger::send('sendmessage', $data);
-        Http::post($path . "/answerCallbackQuery?callback_query_id=". $request['callback_query']['id']);
+        Messenger::send('answerCallbackQuery',array(
+            'callback_query_id' => $request['callback_query']['id']
+        ));
     }
 }
