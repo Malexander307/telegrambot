@@ -7,6 +7,6 @@ use App\Models\Mems;
 class MemsRepository
 {
     public static function getMems(){
-        return Mems::where('id', 1)->get()->last();
+        return Mems::where('id', 3)->first();
     }
 }
