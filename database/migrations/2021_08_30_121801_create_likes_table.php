@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('image_id');
-            $table->foreign('image_id')->references('image_id')->on('mems');
+            $table->foreign('image_id')->references('id')->on('mems');
             $table->timestamps();
         });
     }
