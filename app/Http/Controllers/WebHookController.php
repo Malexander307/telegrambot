@@ -13,7 +13,7 @@ class WebHookController extends Controller
         $request = $request->toArray();
         if (isset($request["message"]["text"])){
           switch ($request["message"]["text"]){
-              case '\/start':
+              case '/start':
                   StartMessage::firstMessage($request);
                   break;
           }
