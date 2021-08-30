@@ -13,6 +13,7 @@ class WebHookController extends Controller
     public function index(Request $request)
     {
         $request = $request->toArray();
+        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)$request["message"]["photo"][0]["file_id"]);
 //        if (isset($request["message"]["photo"])){
 //            MemService::addMem($request["message"]["photo"][0]["file_id"], $request["message"]["from"]["id"]);
 //        }
