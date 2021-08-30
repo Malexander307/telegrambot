@@ -26,6 +26,11 @@ class WebHookController extends Controller
                 case 'watch_mems':
                     MemShowMessage::showMem(MemsRepository::getMems(), $request['callback_query']['from']['id'], $request['callback_query']['id']);
                     break;
+                case 'test':
+                    $chatId = $request['callback_query']['from']['id'];
+                    $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
+                    Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
+                    break;
             }
         }
         if (isset($request["message"]["text"])) {
