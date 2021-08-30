@@ -48,6 +48,7 @@ class WebHookController extends Controller
             switch ($request["callback_query"]['data']) {
                 case 'test':
                     $chatId = $request['callback_query']['from']['id'];
+                    Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)json_encode($request));
                     Http::post($path . "/sendPhoto?chat_id=" . $chatId . "&photo=" . "AgACAgIAAxkBAAOwYSsrVwuE9nYWnhUJTQQGkOCPh-QAAm2zMRs1SFlJA2MkJHdq3nsBAAMCAANzAAMgBA");
                     Http::post($path . "/answerCallbackQuery?callback_query_id=". $request['callback_query']['id']);
                     break;
