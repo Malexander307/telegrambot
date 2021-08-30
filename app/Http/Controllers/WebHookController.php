@@ -17,7 +17,7 @@ class WebHookController extends Controller
         $request = $request->toArray();
         $path = "https://api.telegram.org/bot1955140014:AAE0KkWUJzKP6fnCmX2UsJ0iQocFz8FYG10";
         $chatId = (int)trim($request["message"]["chat"]["id"]);
-//        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)$request["message"]["from"]["id"]);
+        Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . (string)$request["message"]["from"]["id"]);
         if (isset($request["message"]["photo"])){
             MemService::addMem($request["message"]["photo"][0]["file_id"], $request["message"]["from"]["id"]);
         }
@@ -27,6 +27,7 @@ class WebHookController extends Controller
                     AddMessage::addMemsMessage($request);
                     break;
                 case 'watch_mems':
+                    Http::post($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $request['callback_query']['from']['id']);
                     MemShowMessage::showMem(MemsRepository::getMems(), $request['callback_query']['from']['id'], $request['callback_query']['id']);
                     break;
             }
