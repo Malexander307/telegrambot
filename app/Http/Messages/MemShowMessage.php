@@ -4,7 +4,7 @@ namespace App\Http\Messages;
 
 class MemShowMessage
 {
-    public static function showMem($mem, $chat_id){
+    public static function showMem($mem, $chat_id, $query_id){
         $keyboard = [
             'inline_keyboard' => [
                 [
@@ -19,6 +19,9 @@ class MemShowMessage
             'photo' => $mem->photo_id,
             'reply_markup' => $encodedKeyboard
         );
-        Messenger::send('sendphoto', $data);
+        Messenger::send('sendPhoto', $data);
+        Messenger::send('answerCallbackQuery',array(
+            'callback_query_id' => $query_id
+        ));
     }
 }
